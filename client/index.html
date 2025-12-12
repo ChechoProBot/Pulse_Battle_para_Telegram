@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse Battle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-theme="dark">
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="branding">
+          <div class="logo">⚡</div>
+          <div>
+            <h1>Pulse Battle</h1>
+            <p>Duelo de reflejos en 10 segundos</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <div class="balance-chip" id="balanceChip">Saldo: 0</div>
+          <button class="close-app" id="closeAppButton" hidden>Cerrar</button>
+        </div>
+      </header>
+
+      <section class="status-panel">
+        <div class="timer-display">
+          <span>Tiempo</span>
+          <strong id="timeLabel">10.0s</strong>
+        </div>
+        <div class="progress-bar">
+          <div class="progress" id="timeProgress"></div>
+        </div>
+        <div class="match-state" id="matchState">Presiona "Buscar partida"</div>
+      </section>
+
+      <section class="score-panel">
+        <article class="player-card me" id="playerCard">
+          <header>
+            <span class="tag">Tú</span>
+            <h2 id="playerName">Jugador</h2>
+          </header>
+          <div class="click-count" id="playerClicks">0</div>
+        </article>
+        <article class="player-card rival" id="opponentCard">
+          <header>
+            <span class="tag">Rival</span>
+            <h2 id="opponentName">Buscando...</h2>
+          </header>
+          <div class="click-count" id="opponentClicks">0</div>
+        </article>
+      </section>
+
+      <section class="action-panel">
+        <div class="bet-panel">
+          <div class="bet-panel__header">
+            <div>
+              <p class="eyebrow">Apuesta activa</p>
+              <strong id="selectedBetLabel">—</strong>
+            </div>
+            <div class="bet-pot">
+              <div>
+                <p class="eyebrow">Bote total</p>
+                <strong id="potLabel">0.0</strong>
+              </div>
+              <div>
+                <p class="eyebrow">Casa</p>
+                <strong id="houseFeeLabel">0.0</strong>
+              </div>
+            </div>
+          </div>
+          <div class="bet-options" id="betOptions"></div>
+        </div>
+        <button class="pulse-button" id="pulseButton" disabled>Pulse!</button>
+        <button class="queue-button" id="queueButton" disabled>Conectando...</button>
+      </section>
+
+      <section class="extras-panel">
+        <div>
+          <h3>Últimas partidas</h3>
+          <ul id="matchLog" class="match-log"></ul>
+        </div>
+        <div>
+          <h3>Top jugadores</h3>
+          <ol id="rankingList" class="ranking"></ol>
+        </div>
+      </section>
+    </main>
+
+    <section class="modal" id="resultModal" hidden>
+      <div class="modal-card">
+        <p class="modal-state" id="resultTitle">Resultado</p>
+        <p id="resultMessage">—</p>
+        <button id="modalClose">Jugar otra vez</button>
+      </div>
+    </section>
+
+    <section class="loading-overlay" id="loadingOverlay" hidden>
+      <div class="loading-card">
+        <p id="loadingMessage">Conectando a Telegram...</p>
+      </div>
+    </section>
+
+    <audio id="clickSound" preload="auto">
+      <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=" type="audio/wav" />
+    </audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="./game.js"></script>
+  </body>
+</html>
